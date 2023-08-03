@@ -5,16 +5,24 @@ import ITodo from "../../interfaces/ITodo";
 import Modal from "../../components/Modal";
 import { getTodos, getTodosList } from "../../store/reducers/TodoReducer";
 import { getUser } from "../../store/reducers/AuthReducer";
+import { useForm } from "react-hook-form";
+import ITodoRequest from "../../interfaces/ITodoRequest";
 
 const TodoList = () => {
     
     const todos = useSelector(getTodos);
     
     const user = useSelector(getUser);
+
+    const { register, handleSubmit } = useForm<ITodoRequest>();
     
     useEffect(() => {
         getTodosList(user.id);
     }, []);
+
+    const onSubmit = () => {
+        
+    }
 
     return (
         <div className="flex flex-col">
@@ -28,7 +36,7 @@ const TodoList = () => {
                         btnText="Créer une todo"
                     >
                         <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">Créer une todo</h3>
-                        <form className="space-y-6">
+                        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                             <div>
                                 <label htmlFor="title" className="block text-sm font-medium leading-6 text-gray-900">Titre</label>
                                 <div className="mt-2">

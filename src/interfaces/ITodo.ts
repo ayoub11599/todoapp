@@ -3,6 +3,5 @@ export default interface ITodo {
     userId: number,
     title: string,
     description: string,
-    completed: boolean,
-    createdAt: string
+    completed: boolean
 }
