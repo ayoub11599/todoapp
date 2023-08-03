@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux";
 import IRegisterRequest from "../../interfaces/IRegisterRequest";
-import { getUser, registerAttemps } from "../../store/reducers/AuthReducer";
+import { getRegistered, registerAttemps } from "../../store/reducers/AuthReducer";
 import { AppDispatch } from "../../store";
 import { toast } from "react-toastify";
 import { useEffect, useRef } from "react";
@@ -15,7 +15,7 @@ const Register = () => {
     
     const dispatch = useDispatch<AppDispatch>();
 
-    const user = useSelector(getUser);
+    const registered = useSelector(getRegistered);
 
     const onSubmit: SubmitHandler<IRegisterRequest> = (data) => {
         if(data.password != refConfirm.current?.value){
@@ -26,11 +26,12 @@ const Register = () => {
     }
 
     useEffect(() => {
-        if ( user ) {
+        console.log(registered);
+        if ( registered ) {
             toast.success('Le compte est créé avec succès, veuillez vous connecter maintenant.');
             reset();
         }
-    }, [user]);
+    }, [registered]);
 
     return (
         <>

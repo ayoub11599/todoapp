@@ -4,6 +4,7 @@ import Layout from "../layouts";
 import Login from "../pages/auth/login";
 import Register from "../pages/auth/register";
 import ProtectedRoute from "./protected";
+import TodoDetail from "../pages/todos/show";
 
 const router = createBrowserRouter([
     {
@@ -22,7 +23,12 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <ProtectedRoute el={<Register />} required={false} />
-            }
+            },
+            {
+                path: "/:id",
+                element: <ProtectedRoute el={<TodoDetail/>} required={true} />
+                
+            },
         ]
     }
 ]);

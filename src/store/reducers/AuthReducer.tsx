@@ -5,7 +5,8 @@ import ILoginRequest from "../../interfaces/ILoginRequest";
 import IUser from "../../interfaces/IUser";
 
 interface IAuth {
-    user: IUser | null
+    user: IUser | null,
+    registered: boolean,
 }
 
 export const registerAttemps = createAsyncThunk('auth/register', async (req: IRegisterRequest) => {
@@ -21,7 +22,8 @@ export const loginAttemps = createAsyncThunk('auth/login', async (req: ILoginReq
 const AuthSlice = createSlice({
     name: "auth",
     initialState: {
-        user: null
+        user: null,
+        registered: false,
     } as IAuth,
     reducers: {
         logout: (state) => {
@@ -35,10 +37,18 @@ const AuthSlice = createSlice({
         builder.addCase(loginAttemps.fulfilled, (state, action) => {
             state.user = action.payload;
         });
+        builder.addCase(registerAttemps.pending, (state, action) => {
+            state.user = null;
+            state.registered = false;
+        });
+        builder.addCase(registerAttemps.fulfilled, (state, action) => {
+            state.registered = action.payload ? true : false;
+        });
     }
 });
 
 export const getUser = (state:any) => state.authentication.user;
+export const getRegistered = (state:any) => state.authentication.registered;
 
 export const { logout } = AuthSlice.actions;
 
