@@ -22,6 +22,12 @@ class Todo
         return data;
     }
 
+    async update (req: any) {
+        const res = await api.put("/todos/"+req.id, req);
+        const data = await res.data;
+        return data;
+    }
+
     async destroy (id: number) {
         const res = await api.delete("/todos/"+id);
         const data = await res.data;

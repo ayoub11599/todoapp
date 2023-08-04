@@ -28,6 +28,11 @@ export const storeTodo = createAsyncThunk('todos/store', async (r:any) => {
     return data;
 });
 
+export const updateTodo = createAsyncThunk('todos/update', async (r:any) => {
+    const data = await Todo.update(r);
+    return data;
+});
+
 export const deleteTodo = createAsyncThunk('todos/delete', async (r:number) => {
     await Todo.destroy(r);
     return r;
@@ -53,8 +58,15 @@ const TodoSlice = createSlice({
         builder.addCase(storeTodo.fulfilled, (state, action) => {
             state.todos = [action.payload, ...state.todos];
         });
+        builder.addCase(updateTodo.fulfilled, (state, action) => {
+            let index = state.todos.findIndex(t => t.id === action.payload.id);
+            if(index !== -1) {
+                state.todos[index]  = action.payload;
+            }
+            
+        });
         builder.addCase(deleteTodo.fulfilled, (state, action) => {
-            state.todos = [...state.todos.filter(t => t.id != action.payload)];
+            state.todos = [...state.todos.filter(t => t.id !== action.payload)];
         });
     }
 });
