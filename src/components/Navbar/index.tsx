@@ -1,16 +1,25 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getUser } from "../../store/reducers/AuthReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { getUser, logout } from "../../store/reducers/AuthReducer";
 
 export default function(){
     
+    const navigate = useNavigate();
+
     const [show, setShow] = useState(false);
+
+    const dispatch = useDispatch();
 
     const user = useSelector(getUser);
     
     const showMobileNav = () => {
         setShow(s => !s);
+    }
+
+    const userLogout = () => {
+        dispatch(logout());
+        navigate("/login");
     }
 
     return (
@@ -36,7 +45,12 @@ export default function(){
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         {
                             user ? (
-                                <p className="text-white text-xs sm:text-md"><span className="font-medium">{user.username.toUpperCase()}</span></p>
+                                <>
+                                    <p className="text-white text-xs mr-2 sm:text-md"><span className="font-medium">{user.username.toUpperCase()}</span></p>
+                                    <button onClick={userLogout} className="relative rounded px-1 py-1 text-xs bg-red-500 relative hover:bg-red-400 text-white transition-all ease-out duration-300">
+                                        Déconnecter
+                                    </button>
+                                </>
                             ) : (
                                 <>
                                     <Link to={"/login"} className="relative rounded px-3 py-1 mr-2 font-medium overflow-hidden group bg-blue-500 relative hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-400 text-white hover:ring-2 hover:ring-offset-2 hover:ring-blue-400 transition-all ease-out duration-300">
@@ -48,7 +62,6 @@ export default function(){
                                 </>
                             )
                         }
-                        
                     </div>
                 </div>
             </div>

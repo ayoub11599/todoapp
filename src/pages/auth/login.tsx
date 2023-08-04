@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ILoginRequest from "../../interfaces/ILoginRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store";

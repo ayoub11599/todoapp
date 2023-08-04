@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Table from "../../components/Table";
 import Modal from "../../components/Modal";
@@ -235,7 +235,5 @@ const ModalDelete = (props:any) => {
         </Modal>
     )
 }
-
-
 
 export default TodoList;

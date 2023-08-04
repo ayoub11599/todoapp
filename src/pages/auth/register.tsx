@@ -26,7 +26,6 @@ const Register = () => {
     }
 
     useEffect(() => {
-        console.log(registered);
         if ( registered ) {
             toast.success('Le compte est créé avec succès, veuillez vous connecter maintenant.');
             reset();

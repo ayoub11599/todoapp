@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCurrentTodo, getTodo } from "../../store/reducers/TodoReducer";
 import { getUser } from "../../store/reducers/AuthReducer";
 import { useParams } from "react-router-dom";
@@ -40,7 +40,6 @@ const TodoDetail = () => {
                         Pas encore
                     </span>
                 )
-            
             }
         </div>
     )

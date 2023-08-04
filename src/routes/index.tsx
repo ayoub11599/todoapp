@@ -3,7 +3,7 @@ import TodoList from "../pages/todos";
 import Layout from "../layouts";
 import Login from "../pages/auth/login";
 import Register from "../pages/auth/register";
-import ProtectedRoute from "./protected";
+import ProtectedRoute from "../middlewares/protected";
 import TodoDetail from "../pages/todos/show";
 
 const router = createBrowserRouter([
