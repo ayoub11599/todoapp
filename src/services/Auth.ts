@@ -1,6 +1,6 @@
-import api from "../api";
-import ILoginRequest from "../interfaces/ILoginRequest";
-import IRegisterRequest from "../interfaces/IRegisterRequest";
+import api from "../Api";
+import ILoginRequest from "../Interfaces/ILoginRequest";
+import IRegisterRequest from "../Interfaces/IRegisterRequest";
 
 class Auth {
     async register (req: IRegisterRequest) {
@@ -15,7 +15,7 @@ class Auth {
 
     async login (req: ILoginRequest) {
         try {
-            const res = await api.get(`/users?email=${req.email}&password=${req.password}&_limit=1`);
+            const res = await api.get(`/users?email=${req.email}&password=${req.password}`);
             const data = await res.data;
             return data;
         } catch (err:any) {

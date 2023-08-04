@@ -1,26 +1,10 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { getUser, logout } from "../../store/reducers/AuthReducer";
+import React from "react";
+import { Link } from "react-router-dom";
+import useNavbar from "./useNavbar";
 
-export default function(){
+const Navbar = () => {
     
-    const navigate = useNavigate();
-
-    const [show, setShow] = useState(false);
-
-    const dispatch = useDispatch();
-
-    const user = useSelector(getUser);
-    
-    const showMobileNav = () => {
-        setShow(s => !s);
-    }
-
-    const userLogout = () => {
-        dispatch(logout());
-        navigate("/login");
-    }
+    const { user, userLogout, showMobileNav, show } = useNavbar();
 
     return (
         <nav className="bg-purple-800">
@@ -77,3 +61,5 @@ export default function(){
         </nav>
     )
 }
+
+export default Navbar;

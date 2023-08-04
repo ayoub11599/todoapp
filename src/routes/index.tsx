@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import TodoList from "../pages/todos";
-import Layout from "../layouts";
-import Login from "../pages/auth/login";
-import Register from "../pages/auth/register";
-import ProtectedRoute from "../middlewares/protected";
-import TodoDetail from "../pages/todos/show";
+import TodoList from "../Pages/Todos/List";
+import Layout from "../Layouts";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
+import ProtectedRoute from "../Middlewares/Protected";
+import TodoDetail from "../Pages/Todos/Show";
 
 const router = createBrowserRouter([
     {

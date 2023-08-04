@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import Auth from "../../services/Auth";
-import IRegisterRequest from "../../interfaces/IRegisterRequest";
-import ILoginRequest from "../../interfaces/ILoginRequest";
-import IUser from "../../interfaces/IUser";
+import Auth from "../../Services/Auth";
+import IRegisterRequest from "../../Interfaces/IRegisterRequest";
+import ILoginRequest from "../../Interfaces/ILoginRequest";
+import IUser from "../../Interfaces/IUser";
 
 interface IAuth {
     user: IUser | null,
     registered: boolean,
+    message: string,
 }
 
 export const registerAttemps = createAsyncThunk('auth/register', async (req: IRegisterRequest) => {
@@ -16,7 +17,7 @@ export const registerAttemps = createAsyncThunk('auth/register', async (req: IRe
 
 export const loginAttemps = createAsyncThunk('auth/login', async (req: ILoginRequest) => {
     const data = await Auth.login(req);
-    return data.length > 0 ? data[0] : null;
+    return data;
 });
 
 const AuthSlice = createSlice({
@@ -24,6 +25,7 @@ const AuthSlice = createSlice({
     initialState: {
         user: null,
         registered: false,
+        message: ""
     } as IAuth,
     reducers: {
         logout: (state) => {
@@ -35,7 +37,17 @@ const AuthSlice = createSlice({
             state.user = null;
         });
         builder.addCase(loginAttemps.fulfilled, (state, action) => {
-            state.user = action.payload;
+            const length = action.payload.length;
+            if(length === 0) {
+                state.user = null;
+                state.message = "Le compte n'existe pas.";
+            } else if(length == 1){
+                state.user = action.payload[0];
+                state.message = "";
+            } else {
+                state.user = null;
+                state.message = "Le compte existe dèjà.";
+            }
         });
         builder.addCase(registerAttemps.pending, (state, action) => {
             state.user = null;
@@ -48,6 +60,7 @@ const AuthSlice = createSlice({
 });
 
 export const getUser = (state:any) => state.authentication.user;
+export const getMessage = (state:any) => state.authentication.message;
 export const getRegistered = (state:any) => state.authentication.registered;
 
 export const { logout } = AuthSlice.actions;

@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.login-form {
+    @apply text-red-500 bg-green-600 p-5 m-6
+}

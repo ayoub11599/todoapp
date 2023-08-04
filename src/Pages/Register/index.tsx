@@ -1,36 +1,9 @@
 import { Link } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form"
-import { useDispatch, useSelector } from "react-redux";
-import IRegisterRequest from "../../interfaces/IRegisterRequest";
-import { getRegistered, registerAttemps } from "../../store/reducers/AuthReducer";
-import { AppDispatch } from "../../store";
-import { toast } from "react-toastify";
-import { useEffect, useRef } from "react";
+import useRegister from "./useRegister";
 
 const Register = () => {
     
-    const { register, handleSubmit, reset } = useForm<IRegisterRequest>();
-
-    const refConfirm = useRef<HTMLInputElement>(null);
-    
-    const dispatch = useDispatch<AppDispatch>();
-
-    const registered = useSelector(getRegistered);
-
-    const onSubmit: SubmitHandler<IRegisterRequest> = (data) => {
-        if(data.password != refConfirm.current?.value){
-            toast.warn('Le mot de passe de confirmation ne correspond pas.');
-            return;
-        }
-        dispatch(registerAttemps(data));
-    }
-
-    useEffect(() => {
-        if ( registered ) {
-            toast.success('Le compte est créé avec succès, veuillez vous connecter maintenant.');
-            reset();
-        }
-    }, [registered]);
+    const { handleSubmit, onSubmit, register, refConfirm } = useRegister();
 
     return (
         <>
@@ -52,7 +25,7 @@ const Register = () => {
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Adresse e-mail</label>
                             <div className="mt-2">
-                                <input id="email" {...register("email")} type="email" autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input id="email" {...register("email")} type="email" autoComplete="email" required className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
 
@@ -61,7 +34,7 @@ const Register = () => {
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Mot de passe</label>
                             </div>
                             <div className="mt-2">
-                                <input id="password" {...register("password")} type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input id="password" {...register("password")} type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
 
@@ -70,12 +43,12 @@ const Register = () => {
                                 <label htmlFor="confirm" className="block text-sm font-medium leading-6 text-gray-900">Mot de passe de confirmation</label>
                             </div>
                             <div className="mt-2">
-                                <input id="confirm" ref={refConfirm} type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input id="confirm" ref={refConfirm} type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
 
                         <div>
-                            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Se connecter</button>
+                            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500">Se connecter</button>
                         </div>
                     </form >
                     <p className="mt-10 text-center text-sm text-gray-500">

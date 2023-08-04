@@ -1,5 +1,5 @@
-import api from "../api";
-import ITodoRequest from "../interfaces/ITodoRequest";
+import api from "../Api";
+import ITodoRequest from "../Interfaces/ITodoRequest";
 
 class Todo
 {

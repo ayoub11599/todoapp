@@ -1,12 +1,11 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from "react-router-dom";
-import router from './routes';
+import router from './Routes';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './Store';
 
 
-import './css/index.css';
+import './Assets/Styles/main.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(

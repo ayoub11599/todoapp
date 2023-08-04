@@ -1,6 +1,5 @@
-import { ReactNode } from "react";
 import { useSelector } from "react-redux";
-import { getUser } from "../store/reducers/AuthReducer"
+import { getUser } from "../Store/Reducers/AuthReducer"
 import { Navigate } from "react-router-dom";
 
 interface IProps {

@@ -1,12 +1,14 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 interface IProps {
     columns: string[],
     children: ReactNode
 }
 
-export default function (props: IProps) {
+const Table = (props: IProps) => {
+
     const {columns, children} = props;
+    
     return (
         <div className="align-middle inline-block w-full shadow overflow-x-auto sm:rounded-lg border-b border-gray-200">
             <table className="min-w-full">
@@ -26,3 +28,5 @@ export default function (props: IProps) {
         </div>
     )
 }
+
+export default Table;

@@ -1,49 +1,26 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Table from "../../components/Table";
-import Modal from "../../components/Modal";
-import { deleteTodo, getTodos, getTodosList, storeTodo, updateTodo } from "../../store/reducers/TodoReducer";
-import { getUser } from "../../store/reducers/AuthReducer";
+import { useState } from "react";
+import Table from "../../../Components/Table";
+import Modal from "../../../Components/Modal";
+import { deleteTodo, storeTodo, updateTodo } from "../../../Store/Reducers/TodoReducer";
 import { useForm, SubmitHandler } from "react-hook-form";
-import ITodoRequest from "../../interfaces/ITodoRequest";
-import { AppDispatch } from "../../store";
+import ITodoRequest from "../../../Interfaces/ITodoRequest";
 import { Link } from "react-router-dom";
+import useTodoList from "./useTodoList";
 
 const TodoList = () => {
 
-    const [showDelete, setShowDelete] = useState(false);
-    const [showUpdate, setShowUpdate] = useState(false);
-    const [current, setCurrent] = useState<any>(null);
-
-    const dispatch = useDispatch<AppDispatch>();
-    
-    const todos = useSelector(getTodos);
-    
-    const user = useSelector(getUser);
-    
-    useEffect(() => {
-        dispatch(getTodosList(user.id));
-    }, []);
-
-    const closeDeleteModal = () => {
-        setCurrent(null);
-        setShowDelete(false);
-    }
-
-    const closeUpdateModal = () => {
-        setCurrent(null);
-        setShowUpdate(false);
-    }
-
-    const showDeleteModal = (todo:any) => {
-        setCurrent(todo);
-        setShowDelete(true);
-    }
-
-    const showUpdateModal = (todo:any) => {
-        setCurrent(todo);
-        setShowUpdate(true);
-    }
+    const {
+        showDelete,
+        showUpdate,
+        current,
+        todos,
+        closeDeleteModal,
+        closeUpdateModal,
+        showDeleteModal,
+        showUpdateModal,
+        user,
+        dispatch
+    } = useTodoList();
 
     return (
         <div className="flex flex-col">

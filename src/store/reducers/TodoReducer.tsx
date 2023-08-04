@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import Todo from "../../services/Todo";
-import ITodo from "../../interfaces/ITodo";
-import ITodoRequest from "../../interfaces/ITodoRequest";
+import Todo from "../../Services/Todo";
+import ITodo from "../../Interfaces/ITodo";
 
 interface IState {
     todos: ITodo[],
