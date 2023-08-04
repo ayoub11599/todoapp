@@ -1,31 +1,4 @@
 {
-  "users": [
-    {
-      "username": "ayoub boumahra",
-      "email": "ayoub@gmail.com",
-      "password": "aa",
-      "id": 1
-    },
-    {
-      "username": "ayoub boumahra",
-      "email": "ayoub@gmail.com",
-      "password": "aa",
-      "id": 2
-    },
-    {
-      "username": "ayoub 1",
-      "email": "ayoub1@gmail.com",
-      "password": "aa",
-      "id": 3
-    }
-  ],
-  "todos": [
-    {
-      "title": "a",
-      "description": "a",
-      "completed": false,
-      "userId": 3,
-      "id": 4
-    }
-  ]
+  "users": [],
+  "todos": []
 }
