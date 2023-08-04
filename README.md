@@ -10,7 +10,7 @@ This is a simple web application that allows users to register, login, and manag
 
 ## Technology Stack
 
-- Frontend: HTML, CSS, JavaScript
+- Frontend: HTML, CSS, Typescript, React JS
 - Backend: `json-server`
 - Database: JSON file (db.json)
 
@@ -21,18 +21,22 @@ This is a simple web application that allows users to register, login, and manag
 ```bash
 git clone https://github.com/your-username/todo-app.git
 cd todo-app
+```
 
 2. Install dependencies:
 
 ```bash
 npm install
+```
 
 3. Start the JSON server
 
 ```bash
 json-server --watch db.json
+```
 
 4. Start the react server
 
 ```bash
 npm start
+```
